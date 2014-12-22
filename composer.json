@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Datet_": "Datet"
+            "": "src/"
         }
     }
 }
