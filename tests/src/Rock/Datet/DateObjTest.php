@@ -35,10 +35,10 @@ class Rock_Datet_DateObjTest extends PHPUnit_Framework_TestCase
     public function providerWeekends()
     {
         return array(
-            array('20141206', 'Ymd'),
-            // array('20141213', 'Ymd'),
-            // array('20141220', 'Ymd'),
-            // array('20141227', 'Ymd'),
+            array('20141206', '%Y%m%d'),
+            array('20141213', '%Y%m%d'),
+            array('20141220', '%Y%m%d'),
+            array('20141227', '%Y%m%d'),
         );
     }
 
@@ -52,23 +52,23 @@ class Rock_Datet_DateObjTest extends PHPUnit_Framework_TestCase
         $weekend = null;
     }
 
-    // public function providerWeekdays()
-    // {
-    //     return array(
-    //         array('20141208', 'Ymd'),
-    //         array('20141215', 'Ymd'),
-    //         array('20141222', 'Ymd'),
-    //         array('20141229', 'Ymd'),
-    //     );
-    // }
+    public function providerWeekdays()
+    {
+        return array(
+            array('20141208', '%Y%m%d'),
+            array('20141215', '%Y%m%d'),
+            array('20141222', '%Y%m%d'),
+            array('20141229', '%Y%m%d'),
+        );
+    }
 
-    // *
-    //  * @dataProvider providerWeekdays
-     
-    // public function testIsWeekendReturnsFalseForWeekdays($date, $format)
-    // {
-    //     $weekday = new Rock_Datet_DateObj($date, $format);
-    //     $this->assertTrue($weekday->isWeekend);
-    //     $weekday = null;
-    // }
+    /**
+     * @dataProvider providerWeekdays
+     */
+    public function testIsWeekendReturnsFalseForWeekdays($date, $format)
+    {
+        $weekday = new Rock_Datet_DateObj($date, $format);
+        $this->assertFalse($weekday->isWeekend());
+        $weekday = null;
+    }
 }
