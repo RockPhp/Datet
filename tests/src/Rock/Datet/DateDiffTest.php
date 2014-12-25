@@ -33,8 +33,48 @@ class Rock_Datet_DateDiffTest extends PHPUnit_Framework_TestCase
         $this->dateDiff = null;
     }
 
-    public function testTrue()
+    public function testGetYearsReturnsInt()
     {
-        $this->assertTrue(true);
+        $this->assertInternalType('int', $this->dateDiff->getYears());
+    }
+
+    public function testGetMonthsReturnsInt()
+    {
+        $this->assertInternalType('int', $this->dateDiff->getMonths());
+    }
+
+    public function testGetDaysReturnsInt()
+    {
+        $this->assertInternalType('int', $this->dateDiff->getDays());
+    }
+
+    public function testGetHoursReturnsInt()
+    {
+        $this->assertInternalType('int', $this->dateDiff->getHours());
+    }
+
+    public function testGetMinutesReturnsInt()
+    {
+        $this->assertInternalType('int', $this->dateDiff->getMinutes());
+    }
+
+    public function testGetSecondsReturnsInt()
+    {
+        $this->assertInternalType('int', $this->dateDiff->getSeconds());
+    }
+
+    public function testGetPositiveReturnsBoolean()
+    {
+        $this->assertInternalType('boolean', $this->dateDiff->getPositive());
+    }
+
+    public function testGetSecondsTotalReturnsInt()
+    {
+        $this->assertInternalType('int', $this->dateDiff->getSecondsTotal());
+    }
+
+    public function testGetDaysTotalReturnsInt()
+    {
+        $this->assertInternalType('int', $this->dateDiff->getDaysTotal());
     }
 }
