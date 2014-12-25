@@ -46,4 +46,9 @@ class Rock_Datet_DateUtilTest extends PHPUnit_Framework_TestCase
         $dateUtil2->setNovaData($dateObj2);
         $this->assertNotEquals($dateUtil1, $dateUtil2);
     }
+
+    public function testGetSumDaysReturnsRock_Datet_DateObj()
+    {
+        $this->assertInstanceOf('Rock_Datet_DateObj', $this->dateUtil->getSumDays(1));
+    }
 }
