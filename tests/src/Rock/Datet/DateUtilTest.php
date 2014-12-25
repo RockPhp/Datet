@@ -7,6 +7,11 @@ class Rock_Datet_DateUtilTest extends PHPUnit_Framework_TestCase
      */
     public $dateUtil;
 
+    /**
+     * @var Rock_Datet_DateDiff
+     */
+    public $dateObj;
+
     public function assertPreConditions()
     {
         $this->assertTrue(
@@ -15,12 +20,21 @@ class Rock_Datet_DateUtilTest extends PHPUnit_Framework_TestCase
         );
         $this->assertInstanceOf('Rock_Datet_DateUtil', $this->dateUtil);
     }
+
     public function setUp()
     {
-        $this->dateUtil = new Rock_Datet_DateUtil();
+        $this->dateObj = new Rock_Datet_DateObj();
+        $this->dateUtil = new Rock_Datet_DateUtil($this->dateObj);
     }
+
     public function tearDown()
     {
+        $this->dateObj = null;
         $this->dateUtil = null;
+    }
+
+    public function testTrue()
+    {
+        $this->assertTrue(true);
     }
 }
