@@ -2,7 +2,6 @@
 
 class Rock_Datet_DateDiff
 {
-
     private $years = 0;
 
     private $months = 0;

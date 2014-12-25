@@ -10,16 +10,20 @@
          stopOnFailure="false"
          syntaxCheck="false"
          verbose="false">
-    
+
     <testsuites>
         <testsuite name="Rock_Datet">
             <directory>tests/src/Rock</directory>
         </testsuite>
     </testsuites>
-    
+
     <filter>
         <whitelist>
             <directory>src/Rock</directory>
         </whitelist>
     </filter>
+
+    <logging>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+    </logging>
 </phpunit>

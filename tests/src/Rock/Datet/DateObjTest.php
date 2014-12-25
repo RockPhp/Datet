@@ -71,4 +71,19 @@ class Rock_Datet_DateObjTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($weekday->isWeekend());
         $weekday = null;
     }
+
+    public function testGetTimeStampReturnsInt()
+    {
+        $this->assertInternalType('int', $this->dateObj->getTimeStamp());
+    }
+
+    public function testGetFormatReturnsString()
+    {
+        $this->assertInternalType('string', $this->dateObj->getFormat());
+    }
+
+    public function testGetDateReturnsString()
+    {
+        $this->assertInternalType('string', $this->dateObj->getDate());
+    }
 }
