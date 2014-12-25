@@ -47,8 +47,48 @@ class Rock_Datet_DateUtilTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals($dateUtil1, $dateUtil2);
     }
 
-    public function testGetSumDaysReturnsRock_Datet_DateObj()
+    public function testGetSumDaysReturnsRock_Datet_DateObjReturnsRock_Datet_DateObj()
     {
         $this->assertInstanceOf('Rock_Datet_DateObj', $this->dateUtil->getSumDays(1));
+    }
+
+    public function testGetSumWorkingDaysNextReturnsRock_Datet_DateObj()
+    {
+        $this->assertInstanceOf('Rock_Datet_DateObj', $this->dateUtil->getSumWorkingDaysNext(1));
+    }
+
+    public function testGetSumWorkingDaysPrevReturnsRock_Datet_DateObj()
+    {
+        $this->assertInstanceOf('Rock_Datet_DateObj', $this->dateUtil->getSumWorkingDaysPrev(1));
+    }
+
+    public function testGetSumWorkingDaysReturnsRock_Datet_DateObj()
+    {
+        $this->assertInstanceOf('Rock_Datet_DateObj', $this->dateUtil->getSumWorkingDays(1));
+    }
+
+    public function testGetLastDayMonthReturnsRock_Datet_DateObj()
+    {
+        $this->assertInstanceOf('Rock_Datet_DateObj', $this->dateUtil->getLastDayMonth(1));
+    }
+
+    public function testGetLastWorkingDayMontyReturnsRock_Datet_DateObj()
+    {
+        $this->assertInstanceOf('Rock_Datet_DateObj', $this->dateUtil->getLastWorkingDayMonty(1));
+    }
+
+    public function testAddHolidayReturnsRock_Datet_DateUtil()
+    {
+        $this->assertInstanceOf('Rock_Datet_DateUtil', $this->dateUtil->addHoliday($this->dateObj));
+    }
+
+    public function testGetSumMonthsReturnsRock_Datet_DateObj()
+    {
+        $this->assertInstanceOf('Rock_Datet_DateObj', $this->dateUtil->getLastWorkingDayMonty(1));
+    }
+
+    public function testIsWorkingDayReturnsBoolean()
+    {
+        $this->assertInternalType('boolean', $this->dateUtil->isWorkingDay());
     }
 }
