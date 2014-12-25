@@ -76,4 +76,9 @@ class Rock_Datet_DateObjTest extends PHPUnit_Framework_TestCase
     {
         $this->assertInternalType('int', $this->dateObj->getTimeStamp());
     }
+
+    public function testGetFormatReturnsString()
+    {
+        $this->assertInternalType('string', $this->dateObj->getFormat());
+    }
 }
