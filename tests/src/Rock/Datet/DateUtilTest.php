@@ -33,8 +33,17 @@ class Rock_Datet_DateUtilTest extends PHPUnit_Framework_TestCase
         $this->dateUtil = null;
     }
 
-    public function testTrue()
+    public function testSetNovaDataChangesDateObj()
     {
-        $this->assertTrue(true);
+        $dateObj1 = new Rock_Datet_DateObj('01/01/2001');
+        $dateUtil1 = new Rock_Datet_DateUtil($dateObj1);
+        $dateUtil2 = clone $dateUtil1;
+        $this->assertEquals($dateUtil1, $dateUtil2);
+
+        $dateObj2 = new Rock_Datet_DateObj('02/02/2002');
+        $this->assertNotEquals($dateObj1, $dateObj2);
+
+        $dateUtil2->setNovaData($dateObj2);
+        $this->assertNotEquals($dateUtil1, $dateUtil2);
     }
 }
