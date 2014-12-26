@@ -2,6 +2,7 @@
 
 class Rock_Datet_DateDiff
 {
+
     private $years = 0;
 
     private $months = 0;
@@ -51,7 +52,7 @@ class Rock_Datet_DateDiff
             $i = 0;
             do {
                 $dateTmp = $dateUtil->getSumMonths($i);
-                $daysTmp -= date('t', mktime(0, 0, 0, $dateTmp->getDate('%m'), 1, $dateTmp->getDate('%Y')));
+                $daysTmp -= cal_days_in_month(CAL_GREGORIAN, $dateTmp->getDate('%m'), $dateTmp->getDate('%Y'));
                 if ($daysTmp >= 0) {
                     $daysTmp2 = $daysTmp;
                 }

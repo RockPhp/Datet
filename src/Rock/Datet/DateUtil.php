@@ -2,6 +2,7 @@
 
 class Rock_Datet_DateUtil
 {
+
     /**
      * Timestamp do dia de referencia
      *
@@ -26,7 +27,7 @@ class Rock_Datet_DateUtil
     /**
      * Construtor.
      *
-     * @param Rock_Datet_DateObj $dateObj
+     * @param Rock_Datet_DateObj $dateObj            
      */
     public function __construct(Rock_Datet_DateObj $dateObj)
     {
@@ -37,7 +38,7 @@ class Rock_Datet_DateUtil
     /**
      * Substituir data de referencia por uma nova.
      *
-     * @param Rock_Datet_DateObj $dateObj
+     * @param Rock_Datet_DateObj $dateObj            
      */
     public function setNovaData(Rock_Datet_DateObj $dateObj)
     {
@@ -48,7 +49,7 @@ class Rock_Datet_DateUtil
     /**
      * Soma dias.
      *
-     * @param  integer $qtdDias
+     * @param integer $qtdDias            
      * @return integer Timestamp
      */
     private function somaDia($qtdDias)
@@ -58,7 +59,6 @@ class Rock_Datet_DateUtil
             $somaDia = "+$qtdDias";
         }
         $ts = strtotime("$somaDia day", $this->ts);
-
         return $ts;
     }
 
@@ -77,15 +77,14 @@ class Rock_Datet_DateUtil
             $ts = $this->somaDia(++ $i);
             $mesTmp = strftime('%m', $ts);
         }
-
         return $this->somaDia(-- $i);
     }
 
     /**
      * Retorna novo Rock_Datet_DateObj.
      *
-     * @param  integer $ts
-     *                     Timestamp
+     * @param integer $ts
+     *            Timestamp
      * @return DateObj
      */
     private function returnDateObj($ts)
@@ -96,20 +95,19 @@ class Rock_Datet_DateUtil
     /**
      * Soma meses.
      *
-     * @param  integer $qtdMes
+     * @param integer $qtdMes            
      * @return integer Timestamp
      */
     private function somaMes($qtdMes)
     {
         $ts = strtotime("+$qtdMes month", $this->ts);
-
         return $ts;
     }
 
     /**
      * Verifica se o Timestamp é dia útil.
      *
-     * @param  integer $ts
+     * @param integer $ts            
      * @return boolean
      */
     private function checkDiaUtil($ts)
@@ -117,17 +115,16 @@ class Rock_Datet_DateUtil
         $diaSemana = strftime('%u', $ts);
         $mes = strftime('%m', $ts);
         $dia = strftime('%d', $ts);
-        if ($diaSemana < 6 && ! in_array($mes.$dia, $this->mesDiaFeriados)) {
+        if ($diaSemana < 6 && ! in_array($mes . $dia, $this->mesDiaFeriados)) {
             return true;
         }
-
         return false;
     }
 
     /**
      * Retorna Rock_Datet_DateObj com dias somados.
      *
-     * @param  integer            $qtdDias
+     * @param integer $qtdDias            
      * @return Rock_Datet_DateObj
      */
     public function getSumDays($qtdDias)
@@ -138,7 +135,7 @@ class Rock_Datet_DateUtil
     /**
      * Retorna Rock_Datet_DateObj com dias somados, se o dia calculado não for útil, retorna o dia útil seguinte.
      *
-     * @param  integer            $qtdDias
+     * @param integer $qtdDias            
      * @return Rock_Datet_DateObj
      */
     public function getSumWorkingDaysNext($qtdDias)
@@ -147,14 +144,13 @@ class Rock_Datet_DateUtil
         while (! $this->checkDiaUtil($ts)) {
             $ts = strtotime("+1 day", $ts);
         }
-
         return $this->returnDateObj($ts);
     }
 
     /**
      * Retorna Rock_Datet_DateObj com dias somados, se o dia calculado não for útil, retorna o dia útil anterior.
      *
-     * @param  integer            $qtdDias
+     * @param integer $qtdDias            
      * @return Rock_Datet_DateObj
      */
     public function getSumWorkingDaysPrev($qtdDias)
@@ -163,14 +159,13 @@ class Rock_Datet_DateUtil
         while (! $this->checkDiaUtil($ts)) {
             $ts = strtotime("-1 day", $ts);
         }
-
         return $this->returnDateObj($ts);
     }
 
     /**
      * Retorna Rock_Datet_DateObj com dias úteis somados.
      *
-     * @param  integer            $qtdDias
+     * @param integer $qtdDias            
      * @return Rock_Datet_DateObj
      */
     public function getSumWorkingDays($qtdDias)
@@ -184,7 +179,6 @@ class Rock_Datet_DateUtil
                 $i ++;
             }
         }
-
         return $this->returnDateObj($ts);
     }
 
@@ -209,14 +203,13 @@ class Rock_Datet_DateUtil
         while (! $this->checkDiaUtil($ts)) {
             $ts = strtotime("-1 day", $ts);
         }
-
         return $this->returnDateObj($ts);
     }
 
     /**
      * Adiciona feriados considerados nos calculos de dias úteis, ignora ano.
      *
-     * @param  Rock_Datet_DateObj  $dateObj
+     * @param Rock_Datet_DateObj $dateObj            
      * @return Rock_Datet_DateUtil
      */
     public function addHoliday(Rock_Datet_DateObj $dateObj)
@@ -224,15 +217,14 @@ class Rock_Datet_DateUtil
         $ts = $dateObj->getTimeStamp();
         $mes = strftime('%m', $ts);
         $dia = strftime('%d', $ts);
-        array_push($this->mesDiaFeriados, $mes.$dia);
-
+        array_push($this->mesDiaFeriados, $mes . $dia);
         return $this;
     }
 
     /**
      * Retorna Rock_Datet_DateObj com meses somados.
      *
-     * @param  integer            $qtdMes
+     * @param integer $qtdMes            
      * @return Rock_Datet_DateObj
      */
     public function getSumMonths($qtdMes)
@@ -250,3 +242,4 @@ class Rock_Datet_DateUtil
         return $this->checkDiaUtil($this->ts);
     }
 }
+
