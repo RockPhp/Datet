@@ -1,9 +1,9 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', true);
-require_once dirname(__FILE__).'/Rock/Datet/DateObj.php';
-require_once dirname(__FILE__).'/Rock/Datet/DateDiff.php';
-require_once dirname(__FILE__).'/Rock/Datet/DateUtil.php';
+require_once dirname(dirname(__FILE__)).'/src/Rock/Datet/DateObj.php';
+require_once dirname(dirname(__FILE__)).'/src/Rock/Datet/DateDiff.php';
+require_once dirname(dirname(__FILE__)).'/src/Rock/Datet/DateUtil.php';
 // date_default_timezone_set('UTC');
 //require_once 'Rock/AutoLoad.php';
 

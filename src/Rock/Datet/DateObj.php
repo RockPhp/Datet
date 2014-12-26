@@ -20,8 +20,7 @@ class Rock_Datet_DateObj
         try {
             $this->setDate($data);
         } catch (Exception $e) {
-            debug_print_backtrace();
-            echo '<b>DateObj Warning:</b> unparsed string: [' . $e->getMessage() . ']';
+            throw $e;
         }
     }
 
