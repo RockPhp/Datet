@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', true);
+require_once dirname(dirname(__FILE__)).'/src/Rock/Datet/StrpTime.php';
 require_once dirname(dirname(__FILE__)).'/src/Rock/Datet/DateObj.php';
 require_once dirname(dirname(__FILE__)).'/src/Rock/Datet/DateDiff.php';
 require_once dirname(dirname(__FILE__)).'/src/Rock/Datet/DateUtil.php';

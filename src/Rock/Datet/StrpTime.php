@@ -1,11 +1,16 @@
 <?php
-/**
- *
- * @author Mathieu Chabanon
- * @link https://github.com/matchab/strptime-php
- */
 
-if (!function_exists('strptime')) {
+class Rock_Datet_StrpTime
+{
+    public static function strptime($date, $format)
+    {
+        if (!function_exists('strptime')) {
+            return self::strptimeWin($date, $format);
+        }
+
+        return strptime($date, $format);
+    }
+
     /**
      *
      *
@@ -14,7 +19,8 @@ if (!function_exists('strptime')) {
      * @return string
      * @access private
      */
-    function _strptime_match(&$buffer, $pattern)
+
+    private static function _strptime_match(&$buffer, $pattern)
     {
         if (is_array($pattern)) {
             $pattern = implode('|', $pattern);
@@ -41,7 +47,7 @@ if (!function_exists('strptime')) {
      * @return int
      * @access private
      */
-    function _strptime_clamp($n, $min, $max)
+    private static function _strptime_clamp($n, $min, $max)
     {
         return max(min($n, $max), $min);
     }
@@ -53,7 +59,7 @@ if (!function_exists('strptime')) {
      * @return array
      * @access private
      */
-    function _strptime_wdays($p)
+    private static function _strptime_wdays($p)
     {
         $locales = array();
 
@@ -72,7 +78,7 @@ if (!function_exists('strptime')) {
      * @return array
      * @access private
      */
-    function _strptime_months($p)
+    private static function _strptime_months($p)
     {
         $locales = array();
 
@@ -89,8 +95,9 @@ if (!function_exists('strptime')) {
      * @param  string $date
      * @param  string $format
      * @return array
+     * @access private
      */
-    function strptime($date, $format)
+    private static function strptimeWin($date, $format)
     {
         //Default return values
         $tmSec = 0;
@@ -116,32 +123,32 @@ if (!function_exists('strptime')) {
                 switch ($c) {
                     case 'A':
                     case 'a':
-                        _strptime_match($buffer, _strptime_wdays($c));
+                        self::_strptime_match($buffer, self::_strptime_wdays($c));
                         break;
 
                     case 'B':
                     case 'b':
                     case 'h':
-                        $months = _strptime_months($c);
-                        $month = _strptime_match($buffer, $months);
+                        $months = self::_strptime_months($c);
+                        $month = self::_strptime_match($buffer, $months);
                         $tmMon = array_search($month, $months);
                         break;
 
                     case 'D':
                         //Unsupported by strftime on Windows
-                        _strptime_match($buffer, '\d{2}\/\d{2}\/\d{2}');
+                        self::_strptime_match($buffer, '\d{2}\/\d{2}\/\d{2}');
                         break;
 
                     case 'e':
                     case 'd':
-                       $tmMday = intval(_strptime_match($buffer, '\d{2}'));
+                       $tmMday = intval(self::_strptime_match($buffer, '\d{2}'));
                        if ($tmMday === 0) {
-                           $tmMday = intval(_strptime_match($buffer, '\d{1}'));
+                           $tmMday = intval(self::_strptime_match($buffer, '\d{1}'));
                        }
                         break;
                     case 'F':
                         //Unsupported by strftime on Windows
-                        if ($ret = _strptime_match($buffer, '\d{4}-\d{2}-\d{2}')) {
+                        if ($ret = self::_strptime_match($buffer, '\d{4}-\d{2}-\d{2}')) {
                             $frags = explode('-', $ret);
                             $tmYear = intval($frags[0]);
                             $tmMon = intval($frags[1]);
@@ -150,30 +157,30 @@ if (!function_exists('strptime')) {
                         break;
 
                     case 'H':
-                        $tmHour = intval(_strptime_match($buffer, '\d{2}'));
+                        $tmHour = intval(self::_strptime_match($buffer, '\d{2}'));
                         break;
 
                     case 'M':
-                        $tmMin = intval(_strptime_match($buffer, '\d{2}'));
+                        $tmMin = intval(self::_strptime_match($buffer, '\d{2}'));
                         break;
 
                     case 'm':
-                        $tmMon = intval(_strptime_match($buffer, '\d{2}'));
+                        $tmMon = intval(self::_strptime_match($buffer, '\d{2}'));
                         if ($tmMon === 0) {
-                            $tmMon = intval(_strptime_match($buffer, '\d{1}'));
+                            $tmMon = intval(self::_strptime_match($buffer, '\d{1}'));
                         }
                         break;
 
                     case 'S':
-                        $tmSec = intval(_strptime_match($buffer, '\d{2}'));
+                        $tmSec = intval(self::_strptime_match($buffer, '\d{2}'));
                         break;
 
                     case 'Y':
-                        $tmYear = intval(_strptime_match($buffer, '\d{4}'));
+                        $tmYear = intval(self::_strptime_match($buffer, '\d{4}'));
                         break;
 
                     case 'y':
-                        $year = intval(_strptime_match($buffer, '\d{2}'));
+                        $year = intval(self::_strptime_match($buffer, '\d{2}'));
                         if ($year < 69) {
                             $tmYear = 2000 + $year;
                         } else {
@@ -195,9 +202,9 @@ if (!function_exists('strptime')) {
         }
 
         //Clamp hours values
-        $tmHour = _strptime_clamp($tmHour, 0, 23);
-        $tmMin = _strptime_clamp($tmMin, 0, 59);
-        $tmSec = _strptime_clamp($tmSec, 0, 61); //>59 = Leap seconds
+        $tmHour = self::_strptime_clamp($tmHour, 0, 23);
+        $tmMin = self::_strptime_clamp($tmMin, 0, 59);
+        $tmSec = self::_strptime_clamp($tmSec, 0, 61); //>59 = Leap seconds
 
         //Compute wday and yday
         $timestamp = mktime($tmHour, $tmMin, $tmSec, $tmMon, $tmMday, $tmYear);

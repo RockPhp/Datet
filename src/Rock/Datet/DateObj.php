@@ -1,5 +1,4 @@
 <?php
-require_once dirname(__FILE__).'/strptime.php';
 
 class Rock_Datet_DateObj
 {
@@ -25,7 +24,7 @@ class Rock_Datet_DateObj
 
     private function getArrayTime($data)
     {
-        $arrayTime = strptime($data, $this->format);
+        $arrayTime = Rock_Datet_StrpTime::strptime($data, $this->format);
         if (! empty($arrayTime['unparsed'])) {
             throw new Exception($arrayTime['unparsed']);
         }
