@@ -1,18 +1,17 @@
-<?php 
+<?php
 require_once dirname(__FILE__).'/strptime.php';
 
 class Rock_Datet_DateObj
 {
-
     private $ts;
 
     private $format;
 
     /**
      *
-     * @param string $data            
+     * @param string $data
      * @param string $format
-     *            Formato padrão da função strftime() http://php.net/strftime
+     *                       Formato padrão da função strftime() http://php.net/strftime
      */
     public function __construct($data = '', $format = '%d/%m/%Y')
     {
@@ -41,6 +40,7 @@ class Rock_Datet_DateObj
         }
         $arrayTime['tm_mon'] ++;
         $arrayTime['tm_year'] += 1900;
+
         return $arrayTime;
     }
 
@@ -68,6 +68,7 @@ class Rock_Datet_DateObj
         if ($diaSemana > 5) {
             return true;
         }
+
         return false;
     }
 
@@ -79,13 +80,14 @@ class Rock_Datet_DateObj
     /**
      * Retorna data no formato especificado
      *
-     * @param string $format
-     *            não obrigatório. Formato padrão da função strftime() http://php.net/strftime
+     * @param  string $format
+     *                        não obrigatório. Formato padrão da função strftime() http://php.net/strftime
      * @return string
      */
     public function getDate($format = null)
     {
         $format = empty($format) ? $this->format : $format;
+
         return strftime($format, $this->ts);
     }
 }
