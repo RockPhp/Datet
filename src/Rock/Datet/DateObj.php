@@ -63,8 +63,8 @@ class Rock_Datet_DateObj
 
     public function isWeekend()
     {
-        $diaSemana = strftime('%u', $this->ts);
-        if ($diaSemana > 5) {
+        $diaSemana = (int) date("w", $this->ts);
+        if ($diaSemana > 4) {
             return true;
         }
 
